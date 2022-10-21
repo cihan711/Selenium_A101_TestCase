@@ -57,10 +57,11 @@ public class ShoppingPage {
 	}
 	
 	
-	public void GiyimAksesuarUrunBul() {
+	public void GiyimAksesuarUrunBul() throws InterruptedException {
 		
 		Actions a = new Actions(driver);
 		a.moveToElement(driver.findElement(giyimAksesuarKategori)).build().perform();
+		Thread.sleep(1000);
 		driver.findElement(dizaltıCorap).click();
 	}
 	
@@ -81,14 +82,14 @@ public void SiyahUrun() {
 }
 
 
-public void sepetekleIlerle() {
+public void sepetekleIlerle(String Email) {
 	
 	driver.findElement(sepeteEkle).click();
 	driver.findElement(sepetiGoruntule).click();
 	driver.findElement(sepetiOnayla).click();
 	driver.findElement(uyeOlmadanIlerle).click();
 	
-	driver.findElement(email).sendKeys("test140@gmail.com");
+	driver.findElement(email).sendKeys(Email);
 	driver.findElement(emailDevamEt).click();
 }
 
@@ -121,7 +122,7 @@ public void AdresOlustur() throws InterruptedException {
 	JavascriptExecutor js = (JavascriptExecutor) driver;
 	js.executeScript("window.scrollBy(0,250)", "");
 	driver.findElement(kaydetButon).click();
-	
+	Thread.sleep(2000);
 }
 
 public void KaydetveDevamEt() {

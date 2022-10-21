@@ -47,7 +47,7 @@ public WebDriver driver;
 	ShoppingPage  shp = new ShoppingPage(driver);
 	shp.GiyimAksesuarUrunBul();
 	shp.SiyahUrun();
-	shp.sepetekleIlerle();
+	shp.sepetekleIlerle("test140@gmail.com");
 	shp.AdresOlustur();
 	Thread.sleep(3000);
    shp.KaydetveDevamEt();
