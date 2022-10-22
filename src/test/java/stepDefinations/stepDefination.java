@@ -80,7 +80,6 @@ public class stepDefination extends base {
 	    
 	    
 	   //payment page and final case
-	    
 	    @When("user check payment page title")
 	    public void user_check_payment_page_title() throws InterruptedException {
 	    	ShoppingPage shp = new ShoppingPage(driver);
