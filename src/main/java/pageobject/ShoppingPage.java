@@ -8,6 +8,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,53 +18,101 @@ import org.testng.Assert;
 public class ShoppingPage {
 	
 	public WebDriver driver;
-	
-	By giyimAksesuarKategori = By.xpath("(//*[@title='GİYİM & AKSESUAR'])[1]");
-	By dizaltıCorap = By.xpath("//*[text()='Dizaltı Çorap']");
-	
-	By siyahUrun= By.xpath("//h3[@class='name']");
-	
-	
-	By siyahUrunDogrula= By.xpath("//div[@class='selected-variant-text']/span");
-	
-	By sepeteEkle= By.className("add-to-basket");
-	By sepetiGoruntule = By.linkText("Sepeti Görüntüle");
-	By sepetiOnayla = By.className("js-checkout-button");
-	By uyeOlmadanIlerle= By.className("js-proceed-to-checkout-btn");
-	By email= By.xpath("//input[@type='text' and @name='user_email']");
-	By emailDevamEt=By.xpath("/html/body/section/div[1]/div/div[2]/div/div/form/button");
-	
-	
-	By adresOlustur = By.className("js-new-address");
-	By adresBaslik = By.xpath("//input[@name='title']");
-	By ad = By.xpath("//input[@name='first_name']");
-	By soyad= By.xpath("//input[@name='last_name']");
-	By telefon = By.xpath("//input[@name='phone_number']");
-	By sehir = By.xpath("//select[@name='city']");
-	By ilce = By.xpath("//select[@name='township']");
-	By mahalle = By.className("js-district");
-	By adresTarif = By.xpath("//textarea[@name='line']");
-	By kaydetButon = By.xpath("//button[normalize-space()='KAYDET']");
-	
-	
-	By kaydetDevametButon= By.xpath("//*[@class='button block green js-proceed-button']");
-	
-	By odemeKontrol = By.xpath("//div[@data-type='masterpass' and @data-pk='37']");
+
+	@FindBy(xpath ="(//*[@title='GİYİM & AKSESUAR'])[1]")
+   WebElement giyimAksesuarKategori;
+
+
+   @FindBy(xpath="//*[text()='Dizaltı Çorap']")
+	WebElement dizaltıCorap;
+
+	@FindBy(xpath= "//h3[@class='name']")
+	List<WebElement> siyahUrun;
+
+
+	@FindBy(xpath= "//div[@class='selected-variant-text']/span")
+	WebElement siyahUrunDogrula;
+
+	@FindBy(xpath= "/html/body/section/section[2]/div[2]/div[1]/div/div[3]/div[2]/div[1]/button")
+	WebElement sepeteEkle;
+
+	@FindBy(linkText= "Sepeti Görüntüle")
+			WebElement sepetiGoruntule;
+
+	@FindBy(className= "js-checkout-button")
+			WebElement sepetiOnayla;
+
+	@FindBy(className= "js-proceed-to-checkout-btn")
+			WebElement uyeOlmadanIlerle;
+
+
+
+	@FindBy(xpath= "//input[@type='text' and @name='user_email']")
+	WebElement email;
+
+	@FindBy(xpath= "/html/body/section/div[1]/div/div[2]/div/div/form/button")
+	WebElement emailDevamEt;
+
+
+
+	@FindBy(className= "js-new-address")
+	WebElement adresOlustur;
+
+
+
+	@FindBy(xpath= "//input[@name='title']")
+	WebElement adresBaslik;
+
+
+	@FindBy(xpath= "//input[@name='first_name']")
+	WebElement ad;
+
+	@FindBy(xpath= "//input[@name='last_name']")
+	WebElement soyad;
+
+	@FindBy(xpath= "//input[@name='phone_number']")
+	WebElement telefon;
+
+	@FindBy(xpath= "//select[@name='city']")
+	WebElement sehir;
+
+
+	@FindBy(xpath= "//select[@name='township']")
+	WebElement ilce;
+
+	@FindBy(className= "js-district")
+	WebElement mahalle;
+
+	@FindBy(xpath= "//textarea[@name='line']")
+	WebElement adresTarif;
+
+	@FindBy(xpath= "//button[normalize-space()='KAYDET']")
+	WebElement kaydetButon;
+
+
+	@FindBy(className= "js-proceed-button")
+	WebElement kaydetDevametButon;
+
+	@FindBy(xpath= "//div[@data-type='masterpass' and @data-pk='37']")
+	WebElement odemeKontrol;
+
 	
 	
 	
 	
 	public ShoppingPage (WebDriver driver) {
 		this.driver=driver;
+
+		PageFactory.initElements(driver, this);
 	}
 	
 	
 	public void GiyimAksesuarUrunBul() throws InterruptedException {
 		
 		Actions a = new Actions(driver);
-		a.moveToElement(driver.findElement(giyimAksesuarKategori)).build().perform();
+		a.moveToElement(giyimAksesuarKategori).build().perform();
 		Thread.sleep(1000);
-		driver.findElement(dizaltıCorap).click();
+		dizaltıCorap.click();
 	}
 	
 
@@ -70,27 +120,27 @@ public class ShoppingPage {
 public void SiyahUrun() {
 	
 	
-	List<WebElement>  urunler = driver.findElements(siyahUrun);
+	List<WebElement>  urunler = siyahUrun;
 	for (int i=0; i<urunler.size();i++) {
 		if(urunler.get(i).getText().contains("Siyah")) {
 			urunler.get(i).click();
 			break;
 	}}
 	
-	Assert.assertEquals(driver.findElement(siyahUrunDogrula).getText(), "SİYAH");
+	Assert.assertEquals(siyahUrunDogrula.getText(), "SİYAH");
 
 }
 
 
 public void sepetekleIlerle(String Email) {
-	
-	driver.findElement(sepeteEkle).click();
-	driver.findElement(sepetiGoruntule).click();
-	driver.findElement(sepetiOnayla).click();
-	driver.findElement(uyeOlmadanIlerle).click();
-	
-	driver.findElement(email).sendKeys(Email);
-	driver.findElement(emailDevamEt).click();
+
+	sepeteEkle.click();
+	sepetiGoruntule.click();
+	sepetiOnayla.click();
+	uyeOlmadanIlerle.click();
+
+	email.sendKeys(Email);
+	emailDevamEt.click();
 }
 
 
@@ -98,15 +148,15 @@ public void sepetekleIlerle(String Email) {
 
 
 public void AdresOlustur() throws InterruptedException {
-	
-	driver.findElement(adresOlustur).click();
-	driver.findElement(adresBaslik).sendKeys("Ev");
-	driver.findElement(ad).sendKeys("Cıhan");
-	driver.findElement(soyad).sendKeys("Mut");
-	driver.findElement(telefon).sendKeys("5367234343");
-	WebElement city = driver.findElement(sehir);
-	WebElement town = driver.findElement(ilce);
-	WebElement district = driver.findElement(mahalle);
+
+	adresOlustur.click();
+	adresBaslik.sendKeys("Ev");
+	ad.sendKeys("Cıhan");
+	soyad.sendKeys("Mut");
+	telefon.sendKeys("5367234343");
+	WebElement city = sehir;
+	WebElement town = ilce;
+	WebElement district = mahalle;
 	Select citydropdown = new Select(city);
 	citydropdown.selectByVisibleText("İSTANBUL");
 	Select towndropdown = new Select(town);
@@ -116,27 +166,31 @@ public void AdresOlustur() throws InterruptedException {
 	districtdropdown.selectByVisibleText("AMBARLI MAH"); 
 
 	Random rand = new Random();
-	driver.findElement(adresTarif).sendKeys("Demir sokak no:" + rand.nextInt(1000));
+	adresTarif.sendKeys("Demir sokak no:" + rand.nextInt(1000));
 	Thread.sleep(1000);
 
 	JavascriptExecutor js = (JavascriptExecutor) driver;
 	js.executeScript("window.scrollBy(0,250)", "");
-	driver.findElement(kaydetButon).click();
+	kaydetButon.click();
 	Thread.sleep(2000);
 }
 
 public void KaydetveDevamEt() {
 	
 	WebDriverWait wait = new WebDriverWait(driver,30);
-	wait.until(ExpectedConditions.visibilityOfElementLocated(kaydetDevametButon)).click();
+	//kaydetDevametButon
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.
+			className("js-proceed-button"))).click();
 }
 
 
 public void OdemeEkranKontrol() {
 	
-	Assert.assertEquals("Kart ile ödeme", driver.findElement(odemeKontrol).getText());
+	Assert.assertEquals("Kart ile ödeme", odemeKontrol.getText());
 
 }
+
+
 
 
 }

@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Cucumber.TestRunner">
+      <class name="CaseStudy.ShoppingPageTest">
         <methods>
-          <include name="setUpClass"/>
-          <include name="runScenario" invocation-numbers="0 1 2 3"/>
-          <include name="tearDownClass"/>
+          <include name="closeDriver"/>
+          <include name="endtoend"/>
+          <include name="initialize"/>
         </methods>
-      </class> <!-- Cucumber.TestRunner -->
+      </class> <!-- CaseStudy.ShoppingPageTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -5,6 +5,8 @@ import resources.base;
 import java.io.IOException;
 
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
 import com.mongodb.internal.connection.tlschannel.NeedsWriteException;
 
@@ -20,11 +22,16 @@ import pageobject.ShoppingPage;
 public class stepDefination extends base {
 
 
+
+
+
 		
 	    @Given("Initialize the browser with chrome")
 	    public void initialize_the_browser_with_chrome() throws IOException {
 	    	driver =initializeDriver();
 	    }
+	    
+	
 	    @When("user enter homepage without regsiter and user click woman black sock")
 	    public void user_enter_homepage_without_regsiter_and_user_click_woman_black_sock() throws InterruptedException {
 	    	ShoppingPage shp = new ShoppingPage(driver);
@@ -33,7 +40,7 @@ public class stepDefination extends base {
 	    
 	    @Then("Verify black sock")
 	    public void verify_black_sock() {
-	    	ShoppingPage shp = new ShoppingPage(driver);
+	    	//ShoppingPage shp = new ShoppingPage(driver);
 	    	shp.SiyahUrun();
 	    }
 	    
@@ -47,7 +54,7 @@ public class stepDefination extends base {
 	    @When("^user add basket this product and user look basket page and aprove basket and user contiunue and enter (.+) adress$")
 	    public void user_add_basket_this_product(String email) {
 	        
-	    	ShoppingPage shp = new ShoppingPage(driver);
+	    	//ShoppingPage shp = new ShoppingPage(driver);
 	    	shp.sepetekleIlerle(email);
 	    }
 	  
@@ -65,7 +72,7 @@ public class stepDefination extends base {
 	    }
 	    @When("user write address information")
 	    public void user_write_address_information() throws InterruptedException {
-	    	ShoppingPage shp = new ShoppingPage(driver);
+	    	//ShoppingPage shp = new ShoppingPage(driver);
 	       shp.AdresOlustur();
 	       
 	       
@@ -74,7 +81,7 @@ public class stepDefination extends base {
 	    
 	    @Then("user direct payment area")
 	    public void user_direct_payment_area() {
-	    	ShoppingPage shp = new ShoppingPage(driver);
+	    	//ShoppingPage shp = new ShoppingPage(driver);
 		       shp.KaydetveDevamEt();
 	    }
 	    
@@ -83,7 +90,7 @@ public class stepDefination extends base {
 	    //driver is close automatically
 	    @When("user check payment page title")
 	    public void user_check_payment_page_title() throws InterruptedException {
-	    	ShoppingPage shp = new ShoppingPage(driver);
+	    //	ShoppingPage shp = new ShoppingPage(driver);
 	    	shp.OdemeEkranKontrol();
 	    	Thread.sleep(1000);
 	    }
